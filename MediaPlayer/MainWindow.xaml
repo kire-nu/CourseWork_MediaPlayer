@@ -1,0 +1,110 @@
+﻿<Window x:Class="MediaPlayer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MediaPlayer"
+        mc:Ignorable="d"
+        Title="MediaPlayer" Height="700" Width="1200">
+    <StackPanel>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_New Album" Name="menuItemNew" Click="menuItemNew_Click"/>
+                    <MenuItem Header="_Rename Album" Name="menuItemRename" Click="menuItemRename_Click"/>
+                    <MenuItem Header="_Open Album" Name="menuItemOpen" Click="menuItemOpen_Click"/>
+                    <MenuItem Header="_Delete Album" Name="menuItemDelete" Click="menuItemDelete_Click"/>
+                    <MenuItem Header="_Close" Name="menuItemClose" Click="MenuItemClose_Click"/>
+                </MenuItem>
+                <MenuItem Header="_Settings">
+                    <MenuItem Header="_File Types" Name="menuItemFileTypes" Click="menuItemFileTypes_Click"/>
+                </MenuItem>
+
+            </Menu>
+
+        </DockPanel>
+        <Grid HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
+            <Border Margin="10,10,10,0" Height="350" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="1">
+                <Grid Margin="0">
+                    <TreeView x:Name="folderView" Margin="10,10,860,10" TreeViewItem.Selected="TreeViewItem_OnItemSelected" BorderThickness="1">
+                        <TreeView.Resources>
+                            <Style TargetType="{x:Type TreeViewItem}">
+                                <Setter Property="HeaderTemplate">
+                                    <Setter.Value>
+                                        <DataTemplate>
+                                            <TextBlock VerticalAlignment="Center" Text="{Binding}" Padding="2" />
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </TreeView.Resources>
+                    </TreeView>
+                    <ListBox Name="folderImageList" Margin="315,10,10,0" BorderThickness="1" VerticalAlignment="Top" Height="328" HorizontalAlignment="Center">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" Width="850"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Name="NewImageObject" BorderThickness="1" Tag="{Binding ID}" HorizontalAlignment="Center" BorderBrush="#FFD0D1D7" Padding="5" Margin="0,0,0,0" MouseLeftButtonDown="FolderImage_LeftButton" PreviewMouseMove="FolderImage_Move">
+                                    <StackPanel Orientation="Vertical">
+                                        <!--image and dimensions-->
+                                        <Grid Width="100" Height="100">
+                                            <Image Source="{Binding ThumbNailImage}"/>
+                                            <TextBlock Background="#B2000000" Foreground="White" Height="16" TextAlignment="Center" VerticalAlignment="Bottom" Text="{Binding Dimensions}"/>
+                                        </Grid>
+                                        <TextBlock Name="ImageName" Margin="1" HorizontalAlignment="Center" Foreground="#FF787878" Text="{Binding FileName}"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Border>
+        </Grid>
+        <Grid Height="280">
+            <Border Margin="10,10,10,0" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="1">
+                <Grid Margin="0" Height="260">
+                    <ListBox Name="listBoxSlideShows" SelectionChanged="listBoxSlideShows_SelectionChanged" ItemsSource="{Binding slideShows}" HorizontalAlignment="Left" Height="193" Margin="10,10,0,0" VerticalAlignment="Top" Width="300">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <ListBox Name="slideshowImageList" ItemsSource="{Binding selectedImageList}" Margin="314,10,10,55" AllowDrop="True" Drop="SlideshowImageList_Drop" SelectionChanged="selectedImageList_SelectionChanged">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Name="NewImageObject" BorderThickness="1" Tag="{Binding ID}" HorizontalAlignment="Center" BorderBrush="#FFD0D1D7" Padding="5" Margin="0,0,0,0" MouseLeftButtonDown="SlideshowImage_LeftButton" PreviewMouseMove="SlideshowImage_Move">
+                                    <StackPanel Orientation="Vertical">
+                                        <!--image and dimensions-->
+                                        <Grid Width="100" Height="100">
+                                            <Image Source="{Binding ThumbNailImage}"/>
+                                            <TextBlock Background="#B2000000" Foreground="White" Height="16" TextAlignment="Center" VerticalAlignment="Bottom" Text="{Binding Dimensions}" />
+                                        </Grid>
+                                        <TextBlock Name="ImageName" Margin="1" HorizontalAlignment="Center" Foreground="#FF787878" Text="{Binding FileName}"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button x:Name="buttonAddSlideShow" Content="+" HorizontalAlignment="Left" Margin="10,211,0,0" VerticalContentAlignment="Top" VerticalAlignment="Top" Width="40" Height="40" FontWeight="Bold" FontSize="24" Foreground="#FF00AF00" Click="buttonAddSlideShow_Click" RenderTransformOrigin="0.492,0.05"/>
+                    <Button x:Name="buttonRemoveSlideShow" Content="-" HorizontalAlignment="Left" Margin="55,211,0,0" VerticalAlignment="Top" Width="40" Height="40" VerticalContentAlignment="Top" FontWeight="Bold" FontSize="24" Foreground="#FFAF0000" Click="buttonRemoveSlideShow_Click"/>
+                    <Button x:Name="buttonRenameSlideShow" Content="  Rename" HorizontalAlignment="Left" Margin="100,211,0,0" VerticalAlignment="Top" Width="100" Height="40" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Left" Click="buttonRenameSlideShow_Click" />
+                    <TextBox x:Name="textBoxDuration" HorizontalAlignment="Left" Height="23" Margin="446,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" FontSize="14" IsEnabled="False" LostFocus="textBoxDuration_LostFocus"/>
+                    <Label x:Name="labelDuration" HorizontalAlignment="Left" Margin="361,215,0,0" VerticalAlignment="Top" FontSize="14">Duration (s):</Label>
+                    <Button x:Name="buttonRemoveImage" Content="-" HorizontalAlignment="Left" Margin="314,210,0,0" VerticalAlignment="Top" Width="40" Height="40" VerticalContentAlignment="Top" FontWeight="Bold" FontSize="24" Foreground="#FFAF0000" Click="buttonRemoveImage_Click" IsEnabled="False" RenderTransformOrigin="0.5,0.975"/>
+                    <Label x:Name="labelImageText" HorizontalAlignment="Left" Margin="481,215,0,0" VerticalAlignment="Top" FontSize="14">Text:</Label>
+                    <TextBox x:Name="textBoxImageText" HorizontalAlignment="Left" Height="23" Margin="523,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="549" FontSize="14" IsEnabled="False" LostFocus="textBoxImageText_LostFocus"/>
+                    <Button x:Name="buttonPlay" Content="Play" Click="ButtonPlay_Click" Margin="1082,218,10,10"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </StackPanel>
+</Window>

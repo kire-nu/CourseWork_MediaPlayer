@@ -1,0 +1,20 @@
+﻿<Window x:Class="MediaPlayer.RestoreAlbum"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MediaPlayer"
+        mc:Ignorable="d"
+        Title="Open Albums" Height="450" Width="450">
+    <Grid Margin="0,0,0,0">
+        <Label x:Name="labelSelect" Content="Select Album" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="listBoxAlbums" HorizontalAlignment="Center" ItemsSource="{Binding albums}" Width="400" Height="350" Margin="0,0,0,0" VerticalAlignment="Center" MouseDoubleClick="listBox_MouseDoubleClick">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Title}" Tag="{Binding Id}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+    </Grid>
+</Window>

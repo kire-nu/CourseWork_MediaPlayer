@@ -1,0 +1,31 @@
+﻿<Window x:Class="MediaPlayer.FileTypesShowDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MediaPlayer"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
+        Title="Supported File Types" Height="220" Width="250">
+    <Grid>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="135" Margin="10,10,0,0" VerticalAlignment="Top" Width="105">
+            <Grid>
+                <Label x:Name="labelImages" Content="Image Files" HorizontalAlignment="Left" Margin="2,2,0,0" VerticalAlignment="Top"/>
+                <CheckBox x:Name="checkBoxJPG" Content=".jpg" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,30,0,0" Checked="checkBoxImages_Checked" Unchecked="checkBoxImages_Unchecked"/>
+                <CheckBox x:Name="checkBoxJPEG" Content=".jpeg" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" Checked="checkBoxImages_Checked" Unchecked="checkBoxImages_Unchecked"/>
+                <CheckBox x:Name="checkBoxPNG" Content=".png" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,70,0,0" Checked="checkBoxImages_Checked" Unchecked="checkBoxImages_Unchecked"/>
+                <CheckBox x:Name="checkBoxBMP" Content=".bmp" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,90,0,0" Checked="checkBoxImages_Checked" Unchecked="checkBoxImages_Unchecked"/>
+            </Grid>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Right" Height="135" Margin="0,10,10,0" VerticalAlignment="Top" Width="105">
+            <Grid>
+                <Label x:Name="labelVideos" Content="Video Files" HorizontalAlignment="Left" Margin="2,2,0,0" VerticalAlignment="Top"/>
+
+                <CheckBox x:Name="checkBoxAVI" Content=".avi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,30,0,0" Checked="checkBoxVideos_Checked" Unchecked="checkBoxVideos_Unchecked"/>
+                <CheckBox x:Name="checkBoxMPG" Content=".mpg" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" Checked="checkBoxVideos_Checked" Unchecked="checkBoxVideos_Unchecked"/>
+                <CheckBox x:Name="checkBoxMP4" Content=".mp4" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,70,0,0" Checked="checkBoxVideos_Checked" Unchecked="checkBoxVideos_Unchecked"/>
+            </Grid>
+        </Border>
+        <Button x:Name="buttonApplyChanges" Content="ApplyChanges" HorizontalAlignment="Right" Margin="0,150,10,0" VerticalAlignment="Top" Width="105" Click="buttonApplyChanges_Click"/>
+    </Grid>
+</Window>
